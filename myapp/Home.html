@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <title>BBD SCHEDULER</title>
 <meta charset="UTF-8">
@@ -60,22 +60,36 @@
       let token;
       function getTokenID() {
         //window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&scope=&state=&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7", "_self");
-        window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&resource=&state=12345", "_self");
+          window.open("https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/v2.0/authorize?" +
+              "client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1" +
+              "&response_type=id_token+token" +
+              "&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F" +
+              "&scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read" +
+              "&response_mode=fragment" +
+              "&state=12345" +
+        "&nonce=678910", "_self");
       }
       function parseToken() {
         if (window.location.href.includes("token")) {
           var token_url = window.location.href;
           token_url = token_url.split("#")[1].split("&");
-          token = token_url[0].substring(6);
-        }
-
+            token = token_url[0].substring(13);
+            //console.log("TOKEN: "+token);
+          }
         let response;
-        let xmlHttp = new XMLHttpRequest();
+        /*let xmlHttp = new XMLHttpRequest();
         xmlHttp.open("GET", "https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2018-07-03T13:53:41.355Z&enddatetime=2018-07-10T13:53:41.355Z", false);
         xmlHttp.setRequestHeader("Authorization", "bearer " + token)
         xmlHttp.send(null);
         response = xmlHttp.responseText;
-        console.log(response);
+        console.log(response);*/
+          let xmlHttp = new XMLHttpRequest();
+          xmlHttp.open("GET", "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/15000b65-4d66-4d8a-9a03-980bed8be18c/calendar/events", false);
+          xmlHttp.setRequestHeader("Authorization", "bearer " + token);
+          xmlHttp.send(null);
+          response = xmlHttp.responseText;
+          console.log("RESPONSE: " + response);
+          console.log(JSON.parse(xmlHttp.responseText));
       }
     </script>
     <a href="Bookings.html" class="w3-bar-item w3-button w3-padding-large w3-black">
