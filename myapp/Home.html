@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
@@ -20,20 +23,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
   <!-- Avatar image in top left corner -->
-  <img src="logo.png" onclick="getTokenID()" style="width:100%">
+  <img src="logo.png" style="width:100%">
   <a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-black">
-    <i><img src="cal.png"  width="100%"></i>
+    <i><img src="cal.png" width="100%"></i>
     <p><b>SCHEDULE</b></p>
   </a>
-  <script>
-      function getTokenID() {
-        window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&scope=&state=&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7", "_self");
-        var token_url = window.location.href();
-        token_url = token_url.split("#")[1].split("&");
-        token = token_url[0].substring(9);
-        window.alert("alert");
-      }
-    </script>
   <a href="Bookings.html" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i><img src="booking.png" width="100%"></i>
     <p>BOOK A VENUE</p>
@@ -56,34 +50,187 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>Photographer and Web Designer.</p>
     <img src="/w3images/man_smoke.jpg" alt="boy" class="w3-image" width="992" height="1108">
   </header> -->
-  <table>
-    <thead>
-        <th>Time</th>
-        <th>Bookee</th>
-        <th>Reason for booking</th>
-    </thead>
-    <tbody>
-    <tr>
-        <td>09:00-10:00</td>
-        <td>HR</td>
-        <td>A</td>
-    </tr>
-    <tr>
-        <td>10:00-11:00</td>
-        <td>HR</td>
-        <td>A</td>
-    </tr>
-    <tr>
-        <td>11:00-12:00</td>
-        <td>HR</td>
-        <td>A</td>
-    </tr>
-    <tr>
-        <td>12:00-13:00</td>
-        <td>HR</td>
-        <td>A</td>
-    </tr>
-    </tbody>
+  <div class="cd-schedule loading">
+    <div class="timeline">
+      <ul>
+        <li><span>08:00</span></li>
+        <li><span>08:30</span></li>
+        <li><span>09:00</span></li>
+        <li><span>09:30</span></li>
+        <li><span>10:00</span></li>
+        <li><span>10:30</span></li>
+        <li><span>11:00</span></li>
+        <li><span>11:30</span></li>
+        <li><span>12:00</span></li>
+        <li><span>12:30</span></li>
+        <li><span>13:00</span></li>
+        <li><span>13:30</span></li>
+        <li><span>14:00</span></li>
+        <li><span>14:30</span></li>
+        <li><span>15:00</span></li>
+        <li><span>15:30</span></li>
+        <li><span>16:00</span></li>
+        <li><span>16:30</span></li>
+        <li><span>17:00</span></li>
+      </ul>
+    </div> <!-- .timeline -->
+  
+    <div class="events">
+      <ul>
+        <li class="events-group">
+          <div class="top-info"><span>Monday</span></div>
+  
+          <ul>
+            <li class="single-event" data-start="09:30" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
+              <a href="#0">
+                <em class="event-name">Meeting 1</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
+              <a href="#0">
+                <em class="event-name">Meeting 2</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="14:00" data-end="15:15"  data-content="event-yoga-1" data-event="event-3">
+              <a href="#0">
+                <em class="event-name">Meeting 3</em>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="events-group">
+          <div class="top-info"><span>Tuesday</span></div>
+  
+          <ul>
+            <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+              <a href="#0">
+                <em class="event-name">Meeting 4</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="11:30" data-end="13:00"  data-content="event-restorative-yoga" data-event="event-4">
+              <a href="#0">
+                <em class="event-name">Meeting 5</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1">
+              <a href="#0">
+                <em class="event-name">Meeting 6</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
+              <a href="#0">
+                <em class="event-name">Meeting 7</em>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="events-group">
+          <div class="top-info"><span>Wednesday</span></div>
+  
+          <ul>
+            <li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
+              <a href="#0">
+                <em class="event-name">Meeting 297</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3">
+              <a href="#0">
+                <em class="event-name">Meeting 193</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="12:00" data-end="13:45"  data-content="event-rowing-workout" data-event="event-2">
+              <a href="#0">
+                <em class="event-name">Meeting 309</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3">
+              <a href="#0">
+                <em class="event-name">Meeting 167</em>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="events-group">
+          <div class="top-info"><span>Thursday</span></div>
+  
+          <ul>
+            <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+              <a href="#0">
+                <em class="event-name">Meeting 298</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4">
+              <a href="#0">
+                <em class="event-name">Meeting 176</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1">
+              <a href="#0">
+                <em class="event-name">Meeting 265</em>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="events-group">
+          <div class="top-info"><span>Friday</span></div>
+  
+          <ul>
+            <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+              <a href="#0">
+                <em class="event-name">Meeting 765</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1">
+              <a href="#0">
+                <em class="event-name">Meeting 145</em>
+              </a>
+            </li>
+  
+            <li class="single-event" data-start="15:45" data-end="16:45"  data-content="event-yoga-1" data-event="event-3">
+              <a href="#0">
+                <em class="event-name">Meeting 112</em>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="event-modal">
+      <header class="header">
+        <div class="content">
+          <span class="event-date"></span>
+          <h3 class="event-name"></h3>
+        </div>
+  
+        <div class="header-bg"></div>
+      </header>
+  
+      <div class="body">
+        <div class="event-info"></div>
+        <div class="body-bg"></div>
+      </div>
+  
+      <a href="#0" class="close">Close</a>
+    </div>
+  
+    <div class="cover-layer"></div>
+  </div>
 </table>
 
   <!-- About Section -->
@@ -99,7 +246,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 <!-- END PAGE CONTENT -->
 </div>
-<!-- <script type="module" src="./token.js"></script> -->
+<script type="module" src="./token.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script>
+	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+</script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
 </body>
 
 </html>
