@@ -1,51 +1,437 @@
 <!DOCTYPE html>
 <html>
+
 <title>BBD SCHEDULER</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+
+<!-- CSS reset -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Resource style -->
 <style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-/* Set the width of the sidebar to 120px */
-.w3-sidebar {width: 120px;background: #222;}
-/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-#main {margin-left: 120px}
-/* Remove margins from "page content" on small screens */
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif
+  }
+
+  .w3-row-padding img {
+    margin-bottom: 12px
+  }
+
+  #main {
+    margin-left: 120px
+  }
+
+  /* Remove margins from "page content" on small screens */
+
+  @media only screen and (max-width: 600px) {
+    #main {
+      margin-left: 0
+    }
+  }
 </style>
+
+<style>
+  /* Dropdown button for picking rooms */
+
+  .dropbtn {
+    background-color: #6e6e6e;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    height: 56px;
+    position: relative;
+    top: -16px;
+  }
+
+  .dropbtn:hover,
+  .dropbtn:focus {
+    background-color: rgb(200, 0, 0);
+  }
+
+  .dropdown {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: relative;
+    top: -18px;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    z-index: 5;
+  }
+
+  .dropdown a:hover {
+    background-color: #ddd;
+  }
+
+  .show {
+    display: block;
+  }
+
+  /* Dropdown button ends */
+
+  /* Navbar */
+
+  .icon-bar {
+    width: 100%;
+    background-color: #6e6e6e;
+    height: 40px;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .icon-bar a {
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+    position: relative;
+    top: -12px;
+  }
+
+  .icon-bar a:hover {
+    background-color: rgb(200, 0, 0);
+  }
+
+  /* Navbar ends */
+</style>
+
+<!-- Login -->
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Full-width input fields */
+
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 2px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  /* Set a style for all buttons */
+
+  button {
+    background-color: rgb(200, 0, 0);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  /* Extra styles for the cancel button */
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+
+  /* Center the image and position the close button */
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+
+  img.avatar {
+    width: 40%;
+    border-radius: 40%;
+  }
+
+  .container {
+    padding: 16px;
+    text-align: center;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* The Modal (background) */
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: relative;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content/Box */
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 20%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button (x) */
+
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+
+  /* Add Zoom Animation */
+
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+
+  @-webkit-keyframes animatezoom {
+    from {
+      -webkit-transform: scale(0)
+    }
+    to {
+      -webkit-transform: scale(1)
+    }
+  }
+
+  @keyframes animatezoom {
+    from {
+      transform: scale(0)
+    }
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+</style>
+<!-- Login popup ends -->
+</head>
+
 <body class="w3-black">
+  <!-- Script for getting the Access token -->
+  <script>
+    let token;
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <!-- Avatar image in top left corner -->
-  <img src="logo.png" style="width:100%">
-  <a href="Home.html" class="w3-bar-item w3-button w3-padding-large w3-black">
-    <i><img src="cal.png" width="100%"></i>
-    <p><b>SCHEDULE</b></p>
-  </a>
-  <a href="Bookings.html" class="w3-bar-item w3-button w3-padding-large w3-black">
-    <i><img src="booking.png" width="100%"></i>
-    <p>BOOK A VENUE</p>
-  </a>
-</nav>
+    function getTokenID() {
+      //window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&scope=&state=&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7", "_self");
+      window.open("https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/v2.0/authorize?" +
+        "client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1" +
+        "&response_type=id_token+token" +
+        "&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F" +
+        "&scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read" +
+        "&response_mode=fragment" +
+        "&state=12345" +
+        "&nonce=678910", "_self");
+    }
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">SCHEDULE</a>
-    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">BOOK A VENUE</a>
+    function parseToken() {
+      if (window.location.href.includes("token")) {
+        var token_url = window.location.href;
+        token_url = token_url.split("#")[1].split("&");
+        token = token_url[0].substring(13);
+        //console.log("TOKEN: "+token);
+      }
+      let response;
+      /*let xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", "https://graph.microsoft.com/v1.0/me/calendarview?startdatetime=2018-07-03T13:53:41.355Z&enddatetime=2018-07-10T13:53:41.355Z", false);
+      xmlHttp.setRequestHeader("Authorization", "bearer " + token)
+      xmlHttp.send(null);
+      response = xmlHttp.responseText;
+      console.log(response);*/
+      let xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET",
+        "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/15000b65-4d66-4d8a-9a03-980bed8be18c/calendar/events",
+        false);
+      xmlHttp.setRequestHeader("Authorization", "bearer " + token);
+      xmlHttp.send(null);
+      response = xmlHttp.responseText;
+      console.log("RESPONSE: " + response);
+      console.log(JSON.parse(xmlHttp.responseText));
+    }
+  </script>
+
+  <!-- Navbar Elements -->
+  <div class="icon-bar">
+    <a href="Home.html">
+      <img src="recources/cal.png" height="40px;">
+      <text style="position: relative; top: -6px;">SCHEDULE</text>
+    </a>
+    <a href="Bookings.html">
+      <img src="recources/booking.png" height="40px;">
+      <text style="position: relative; top: -6px;">BOOKINGS</text>
+    </a>
   </div>
-</div>
+  <!-- Navbar ends -->
 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  
+  <!-- Dropdown button for the rooms -->
+  <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">
+      <img src="recources/room.png" height="40px;">
+      <text style="position: relative; top: -8px;">ROOM</text>
+    </button>
+    <div id="myDropdown" class="dropdown-content">
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Assembly.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Assembly</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Flex.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Flex</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/iOS.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">iOS</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Windows.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Windows</text>
+      </a>
+    </div>
+  </div>
+  <!-- Dropdown button ends -->
 
-<!-- END PAGE CONTENT -->
-</div>
+  <!-- Login popup -->
+  <div id="id01" class="modal">
 
+    <form class="modal-content animate" action="/action_page.php">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="recources/Icon.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname">
+          <b>Username</b>
+        </label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <br>
+        <label for="psw">
+          <b>Password</b>
+        </label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <br>
+        <button type="submit">Login</button>
+
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+  <!-- Login popup ends -->
+
+  </div>
+  <script type="module" src="js/token.js"></script>
+  <script src="js/modernizr.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script>
+    if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+  </script>
+  <script>
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+  <script src="js/main.js"></script>
+  <!-- Resource jQuery -->
 </body>
+
 </html>
