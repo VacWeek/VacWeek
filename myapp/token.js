@@ -1,4 +1,4 @@
-    import { Msal } from "./msal";
+    import { Msal } from "msal";
     window.alert("hey it runs")
     var applicationConfig = {
             clientID: 'af4bf8cf-c789-4e0d-8d22-c0028c419bf1',
