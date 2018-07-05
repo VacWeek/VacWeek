@@ -277,7 +277,7 @@
 
 </head>
 
-<body class="w3-black" onload="parseToken()">
+<body class="w3-black" onload="parseToken(room)">
   <script>
     let token;
 
@@ -297,7 +297,7 @@
         "&nonce=678910", "_self");
     }
 
-    function parseToken() {
+    function parseToken(r) {
       if (window.location.href.includes("token")) {
         var token_url = window.location.href;
         token_url = token_url.split("#")[1].split("&");
@@ -314,6 +314,12 @@
       let xmlHttp = new XMLHttpRequest();
       //cccbf502-6b91-40d6-be02-5ffa0eb711d6 the other one
       //af4bf8cf-c789-4e0d-8d22-c0028c419bf1 our original
+      if (!room) {
+        room = "Assembly";
+      } else {
+        room = r;
+      }
+      document.getElementById("myText").innerHTML = room;
       xmlHttp.open("GET",
         "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/" + room +
         "@bbd.co.za/calendar/events",
@@ -487,6 +493,14 @@
       }
     }
 
+    function clearTable() {
+      if (room != "Assembly") {
+        var tbody = $("div.events ul");
+        tbody.html("");
+        window.alert(room);
+      }
+    }
+
     function addDays(date, days) {
       var result = new Date(date);
       result.setDate(result.getDate() + days);
@@ -496,10 +510,11 @@
 
   <!-- Navbar Elements -->
   <div class="icon-bar">
-    <!-- <a href="Home.html"> -->
-    <img src="recources/cal.png" height="40px;" onclick="getTokenID()">
-    <text style="position: relative; top: -6px;">SCHEDULE</text>
-    <!-- </a> -->
+    <img src="recources/Icon.png" height="40px" style="position: relative; float: left; left: 5px; top: -1px;" onclick="getTokenID()">
+    <a href="Home.html" style="position: relative; left: 10px;">
+      <img src="recources/cal.png" height="40px;">
+      <text style="position: relative; top: -6px;">SCHEDULE</text>
+    </a>
     <a href="Bookings.html">
       <img src="recources/booking.png" height="40px;">
       <text style="position: relative; top: -6px;">BOOKINGS</text>
@@ -514,20 +529,20 @@
       <text style="position: relative; top: -8px;">ROOM</text>
     </button>
     <div id="myDropdown" class="dropdown-content">
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Assembly.png" height="30px" onclick="getRoom('Assembly')">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Assembly.png" height="30px" onclick="clearTable(); getRoom('Assembly'); parseToken('Assembly')">
         <text style="position: relative; top: -8px; left: 2px">Assembly</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Flex.png" height="30px" onclick="getRoom('Flex')">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Flex.png" height="30px" onclick="clearTable(); getRoom('Flex'); parseToken('Flex')">
         <text style="position: relative; top: -8px; left: 2px">Flex</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/iOS.png" height="30px" onclick="getRoom('iOS')">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/iOS.png" height="30px" onclick="clearTable(); getRoom('iOS'); parseToken('iOS')">
         <text style="position: relative; top: -8px; left: 2px">iOS</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Windows.png" height="30px" onclick="getRoom('Windows')">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Windows.png" height="30px" onclick="clearTable(); getRoom('Windows'); parseToken('Windows')">
         <text style="position: relative; top: -8px; left: 2px">Windows</text>
       </a>
     </div>
@@ -562,7 +577,8 @@
 
   <script>
     // Get the modal
-    let room;
+    let room = "Assembly";
+    document.getElementById("myText").innerHTML = room;
 
     function getRoom(r) {
       room = r;
