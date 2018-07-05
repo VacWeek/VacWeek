@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <title>BBD SCHEDULER</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
+
 <!-- CSS reset -->
 <link rel="stylesheet" href="css/style.css">
+
 <!-- Resource style -->
 <style>
   body,
@@ -40,16 +45,18 @@
 </style>
 
 <style>
+  /* Dropdown button for picking rooms */
+
   .dropbtn {
     background-color: #6e6e6e;
     color: white;
-    padding: 16px;
+    /* padding: 16px; */
     font-size: 16px;
     border: none;
     cursor: pointer;
-    height: 56px;
+    height: 55px;
     position: relative;
-    top: -16px;
+    top: -15px;
   }
 
   .dropbtn:hover,
@@ -92,6 +99,10 @@
     display: block;
   }
 
+  /* Dropdown button ends */
+
+  /* Navbar */
+
   .icon-bar {
     width: 100%;
     background-color: #6e6e6e;
@@ -115,10 +126,157 @@
   .icon-bar a:hover {
     background-color: rgb(200, 0, 0);
   }
+
+  /* Navbar ends */
 </style>
+
+<!-- Login -->
+<style>
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 2px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  /* Set a style for all buttons */
+
+  button {
+    background-color: rgb(200, 0, 0);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  /* Extra styles for the cancel button */
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+
+  /* Center the image and position the close button */
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+
+  img.avatar {
+    width: 40%;
+    border-radius: 40%;
+  }
+
+  .container {
+    padding: 16px;
+    text-align: center;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* The Modal (background) */
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: relative;
+    /* Stay in place */
+    z-index: 10;
+    /* Sit on top */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content/Box */
+
+  .modal-content {
+    background-color: #050505;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 20%;
+    /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button (x) */
+
+  .close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: rgb(200, 0, 0);
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+  }
+
+  /* Add Zoom Animation */
+
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+
+  @-webkit-keyframes animatezoom {
+    from {
+      -webkit-transform: scale(0)
+    }
+    to {
+      -webkit-transform: scale(1)
+    }
+  }
+
+  @keyframes animatezoom {
+    from {
+      transform: scale(0)
+    }
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+</style>
+<!-- Login popup ends -->
+
 </head>
 
-<body class="w3-black">
+<body class="w3-black" onload="parseToken()" <!-- Script for getting the Access token -->
   <script>
     let token;
 
@@ -126,9 +284,13 @@
       //window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&scope=&state=&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7", "_self");
       window.open("https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/v2.0/authorize?" +
         "client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1" +
+        //"client_id=2bd95660-7a62-4dbf-879d-f60294edf8d9" +
         "&response_type=id_token+token" +
         "&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F" +
-        "&scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read" +
+        "&scope=openid" +
+        "%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read" +
+        "%20https%3A%2F%2Fgraph.microsoft.com%2Fcalendars.read" +
+        "%20https%3A%2F%2Fgraph.microsoft.com%2Fcalendars.read.shared" +
         "&response_mode=fragment" +
         "&state=12345" +
         "&nonce=678910", "_self");
@@ -149,61 +311,249 @@
       response = xmlHttp.responseText;
       console.log(response);*/
       let xmlHttp = new XMLHttpRequest();
+      //cccbf502-6b91-40d6-be02-5ffa0eb711d6 the other one
+      //af4bf8cf-c789-4e0d-8d22-c0028c419bf1 our original
       xmlHttp.open("GET",
-        "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/15000b65-4d66-4d8a-9a03-980bed8be18c/calendar/events",
+        "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/Assembly@bbd.co.za/calendar/events",
         false);
-      xmlHttp.setRequestHeader("Authorization", "bearer " + token);
+
+      xmlHttp.setRequestHeader("Authorization", "Bearer " + token);
       xmlHttp.send(null);
       response = xmlHttp.responseText;
       console.log("RESPONSE: " + response);
       console.log(JSON.parse(xmlHttp.responseText));
+      var jsonResponse = JSON.parse(xmlHttp.responseText);
+
+      var myJSON = JSON.stringify(jsonResponse);
+      var obj = JSON.parse(myJSON);
+
+      var I;
+      let days = [];
+      let events = [];
+      let refference_day = new Date();
+
+      function event_day(subject, bookee, start_time, end_time) {
+        this.Subject = subject;
+        this.Bookee = bookee;
+        this.Start_time = start_time;
+        this.End_time = end_time;
+      }
+      Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+      }
+      for (let days_count = 0; days_count < 5; days_count++) {
+        refference_day.addDays(days_count);
+        for (I = 0; I < obj.length; I++) {
+          var bookingSubject = obj.value[I].subject;
+          var bookee = obj.value[0].organizer.emailAddress.name;
+          var startMain = obj.value[I].start.dateTime;
+          var endMain = obj.value[I].end.dateTime;
+
+
+
+          //starting
+          var startTime = startMain.slice(11, 16);
+          var startDate = startMain.slice(0, 10);
+          var startDay = startMain.slice(8, 10);
+
+          //ending
+          var endTime = endMain.slice(11, 16);
+          var endDate = endMain.slice(0, 10);
+          var endDay = endMain.slice(8, 10);
+
+          if (startDate == refference_day.getDate()) {
+
+            var daysInbetween = (endDay - startDay) - 1;
+            lstOut.innerHTML = lstOut.innerHTML + "Days inbetween: " + daysInbetween + "<br>";
+
+            //lstOut.innerHTML = lstOut.innerHTML + "" +  + "<br>";
+
+            lstOut.innerHTML = lstOut.innerHTML + "<br>Internal Bookings::" + "<br>";
+            if (startDay != endDay) //multiple dates inside booking
+            {
+              //add day 1 details (startTime :: 17h00)
+              //lstOut.innerHTML = lstOut.innerHTML + "Day 1:" + "<br>";
+              if (dayToColumn(startDate) != -1) {
+                days[days_count].events.push(new event_day(bookingSubject, bookee, startTime, "17:00"))
+                //lstOut.innerHTML = lstOut.innerHTML + "Date: " + startDate + ",   " + startTime + " - 17:00" + "<br>";
+
+              }
+              //add inbetween days (08h00 :: 17h00)
+              var K;
+              var limit = 4 - days_count;
+              var countToLimit = 0;
+              for (K = 1; K <= daysInbetween; K++) {
+                //lstOut.innerHTML = lstOut.innerHTML + "Day " + (K + 1) + ":" + "<br>";
+                if (countToLimit == limit)
+                  break;
+                countToLimit++;
+                var usedDate = addDays(startDate, K);
+                if (dayToColumn(usedDate) != -1) {
+                  days[days_count + K].events.push(new event_day(bookingSubject, bookee, "08:00", "17:00"))
+                }
+              }
+              //add last day (08h00 :: endTime)
+              //lstOut.innerHTML = lstOut.innerHTML + "Day " + (K + 1) + "<br>";
+              if (dayToColumn(endDate) != -1) {
+                let idxLast = -1;
+                let testDay = new Date();
+                for (let findLast = 0; findLast < 4; findLast++) {
+                  if (testDay.addDays(findLast).getDate == endDate)
+                    idxLast = findLast;
+                }
+                if (idxLast != -1) {
+                  days[idxLast].events.push(new event_day(bookingSubject, bookee, "08:00", endTime));
+                }
+                //lstOut.innerHTML = lstOut.innerHTML + "Date: " + endDate + ",   08:00 - " + endTime + "<br>";
+              }
+            } else //booking happens in 1 day
+            {
+              days[days_count].events.push(new event_day(bookingSubject, bookee, startTime, endTime))
+            }
+
+            //lstOut.innerHTML = lstOut.innerHTML + "<br>";
+          }
+        }
+      }
+
+      let index = new Date().getDay();
+      let daysToDisplay = [];
+      while (daysToDisplay.length < 5) {
+        if (index > 6)
+          index = 0;
+        daysToDisplay.push(index);
+        index++;
+      }
+
+      let refference = {
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+        0: "Sunday"
+      }
+
+      let container = document.querySelector("div.events ul");
+      let day_template = document.querySelector("#day_template");
+      let event_template = document.querySelector("#event_template");
+      let daysarray_counter = 0;
+      for (let dayToDisplay of daysToDisplay) {
+        let cloneDay = document.importNode(day_template.content, true);
+        let heading = cloneDay.querySelector("div.top-info span");
+        heading.textContent = refference[dayToDisplay];
+
+        let ul = cloneDay.querySelector("ul");
+        let eventsHappeningToday = days[daysarray_counter];
+
+        if (eventsHappeningToday != null) {
+          for (let eventToDisplay of eventsHappeningToday) {
+            let cloneEvent = document.importNode(event_template.content, true);
+            let li = cloneEvent.querySelector("li");
+            li.setAttribute("data-start", eventToDisplay.Start_time);
+            li.setAttribute("data-end", eventToDisplay.End_time);
+            li.setAttribute("data-content", "event-abs-circuit");
+            li.setAttribute("data-event", eventToDisplay.Subject)
+
+            ul.appendChild(cloneEvent);
+          }
+        }
+        daysarray_counter++;
+        container.appendChild(cloneDay);
+      }
+    }
+
+    function addDays(date, days) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return (result.toISOString()).slice(0, 10);
     }
   </script>
 
+  <!-- Navbar Elements -->
   <div class="icon-bar">
     <a href="Home.html">
-      <img src="cal.png" height="40px;">
+      <img src="recources/cal.png" height="40px;">
       <text style="position: relative; top: -6px;">SCHEDULE</text>
     </a>
     <a href="Bookings.html">
-      <img src="booking.png" height="40px;">
+      <img src="recources/booking.png" height="40px;">
       <text style="position: relative; top: -6px;">BOOKINGS</text>
     </a>
   </div>
+  <!-- Navbar ends -->
 
+  <!-- Dropdown button for the rooms -->
   <div class="dropdown">
     <button onclick="myFunction()" class="dropbtn">
-      <img src="room.png" height="40px;">
+      <img src="recources/room.png" height="40px;">
       <text style="position: relative; top: -8px;">ROOM</text>
     </button>
     <div id="myDropdown" class="dropdown-content">
-      <a href="#">
-        <img src="Assembly.png">Assembly</a>
-      <a href="#">
-        <img src="Flex.png">Flex</a>
-      <a href="#">
-        <img src="iOS.png">iOS</a>
-      <a href="#">
-        <img src="Windows.png">Windows</a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Assembly.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Assembly</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Flex.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Flex</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/iOS.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">iOS</text>
+      </a>
+      <a href="#" onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Windows.png" height="30px">
+        <text style="position: relative; top: -8px; left: 2px">Windows</text>
+      </a>
     </div>
+  </div>
+  <!-- Dropdown button ends -->
+
+  <!-- Login popup -->
+  <div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/action_page.html">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="recources/Icon.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname">
+          <b>Username</b>
+        </label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <br>
+        <label for="psw">
+          <b>Password</b>
+        </label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <br>
+        <button type="submit">Login</button>
+
+      </div>
+    </form>
   </div>
 
-  <!-- Navbar on small screens (Hidden on medium and large screens) -->
-  <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-      <a href="#" class="w3-bar-item w3-button" style="width:25% !important">SCHEDULE</a>
-      <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">BOOK A VENUE</a>
-    </div>
-  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+  <!-- Login popup ends -->
 
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
-    <!-- Header/Home -->
-    <!-- <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> John Doe.</h1>
-    <p>Photographer and Web Designer.</p>
-    <img src="/w3images/man_smoke.jpg" alt="boy" class="w3-image" width="992" height="1108">
-  </header> -->
     <div class="cd-schedule loading">
       <div class="timeline">
         <ul>
@@ -269,149 +619,30 @@
       <!-- .timeline -->
 
       <div class="events">
-        <ul>
+        <template id="day_template">
           <li class="events-group">
             <div class="top-info">
               <span>Monday</span>
             </div>
 
             <ul>
-              <li class="single-event" data-start="09:30" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
-                <a href="#0">
-                  <em class="event-name">Meeting 1</em>
-                </a>
-              </li>
 
-              <li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
-                <a href="#0">
-                  <em class="event-name">Meeting 2</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="14:00" data-end="15:15" data-content="event-yoga-1" data-event="event-3">
-                <a href="#0">
-                  <em class="event-name">Meeting 3</em>
-                </a>
-              </li>
             </ul>
           </li>
+        </template>
 
-          <li class="events-group">
-            <div class="top-info">
-              <span>Tuesday</span>
-            </div>
-
-            <ul>
-              <li class="single-event" data-start="10:00" data-end="11:00" data-content="event-rowing-workout" data-event="event-2">
-                <a href="#0">
-                  <em class="event-name">Meeting 4</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="11:30" data-end="13:00" data-content="event-restorative-yoga" data-event="event-4">
-                <a href="#0">
-                  <em class="event-name">Meeting 5</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="13:30" data-end="15:00" data-content="event-abs-circuit" data-event="event-1">
-                <a href="#0">
-                  <em class="event-name">Meeting 6</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="15:45" data-end="16:45" data-content="event-yoga-1" data-event="event-3">
-                <a href="#0">
-                  <em class="event-name">Meeting 7</em>
-                </a>
-              </li>
-            </ul>
+        <template id="event_template">
+          <li class="single-event" data-start="09:30" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
+            <a href="#0">
+              <em class="event-name">Meeting 1</em>
+            </a>
           </li>
+        </template>
+        <div class="events">
+          <ul>
 
-          <li class="events-group">
-            <div class="top-info">
-              <span>Wednesday</span>
-            </div>
-
-            <ul>
-              <li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
-                <a href="#0">
-                  <em class="event-name">Meeting 297</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-3">
-                <a href="#0">
-                  <em class="event-name">Meeting 193</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="12:00" data-end="13:45" data-content="event-rowing-workout" data-event="event-2">
-                <a href="#0">
-                  <em class="event-name">Meeting 309</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="13:45" data-end="15:00" data-content="event-yoga-1" data-event="event-3">
-                <a href="#0">
-                  <em class="event-name">Meeting 167</em>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="events-group">
-            <div class="top-info">
-              <span>Thursday</span>
-            </div>
-
-            <ul>
-              <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
-                <a href="#0">
-                  <em class="event-name">Meeting 298</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="12:00" data-end="13:45" data-content="event-restorative-yoga" data-event="event-4">
-                <a href="#0">
-                  <em class="event-name">Meeting 176</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="15:30" data-end="16:30" data-content="event-abs-circuit" data-event="event-1">
-                <a href="#0">
-                  <em class="event-name">Meeting 265</em>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="events-group">
-            <div class="top-info">
-              <span>Friday</span>
-            </div>
-
-            <ul>
-              <li class="single-event" data-start="10:00" data-end="11:00" data-content="event-rowing-workout" data-event="event-2">
-                <a href="#0">
-                  <em class="event-name">Meeting 765</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="12:30" data-end="14:00" data-content="event-abs-circuit" data-event="event-1">
-                <a href="#0">
-                  <em class="event-name">Meeting 145</em>
-                </a>
-              </li>
-
-              <li class="single-event" data-start="15:45" data-end="16:45" data-content="event-yoga-1" data-event="event-3">
-                <a href="#0">
-                  <em class="event-name">Meeting 112</em>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
 
       <div class="event-modal">
@@ -436,17 +667,6 @@
     </div>
     </table>
 
-    <!-- About Section -->
-    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-      <!-- <h2 class="w3-text-light-grey">My Name</h2>
-    <hr style="width:200px" class="w3-opacity">
-    <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p> -->
-      <!-- End Contact Section -->
-    </div>
-
     <!-- END PAGE CONTENT -->
   </div>
   <script type="module" src="./token.js"></script>
@@ -456,8 +676,6 @@
     if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
   </script>
   <script>
-    /* When the user clicks on the button, 
-                                                                                                                                                                                                                                                                                                                                      toggle between hiding and showing the dropdown content */
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
