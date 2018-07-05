@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <title>BBD SCHEDULER</title>
@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
 
@@ -278,6 +280,12 @@
 <body class="w3-black" onload="parseToken(room)">
   <script>
     let token;
+    let hasToken = false;
+    let room = localStorage.getItem("room");
+    if (!room) {
+      room = "Assembly";
+    }
+
 
     function getTokenID() {
       //window.open("https://login.microsoftonline.com/BBDZA.onmicrosoft.com/oauth2/authorize?client_id=af4bf8cf-c789-4e0d-8d22-c0028c419bf1&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%3A44302%2F&response_mode=fragment&scope=&state=&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7", "_self");
@@ -293,9 +301,12 @@
         "&response_mode=fragment" +
         "&state=12345" +
         "&nonce=678910", "_self");
+      hasToken = true;
     }
 
     function parseToken(r) {
+      localStorage.setItem("room", r);
+      //room = localStorage.getItem("room");
       if (window.location.href.includes("token")) {
         var token_url = window.location.href;
         token_url = token_url.split("#")[1].split("&");
@@ -480,6 +491,10 @@
           li.setAttribute("data-start", eventToDisplay.Start_time);
           li.setAttribute("data-end", eventToDisplay.End_time);
           li.setAttribute("data-content", "event-abs-circuit");
+          //li.setAttribute("event-info", "Subject: " + eventToDisplay.Subject + "\n" + "Bookee: " + eventToDisplay.Bookee);
+          let div_display = document.querySelectorAll("#event_data h1");
+          div_display[0].textContent = "Subject: " + eventToDisplay.Subject;
+          div_display[1].textContent = "Bookee: " + eventToDisplay.Bookee;
           var num = Math.round(Math.random() * (4 - 1) + 1);
           li.setAttribute("data-event", "event-" + num.toString());
           let em = li.querySelector("em");
@@ -493,11 +508,14 @@
     }
 
     function clearTable() {
-      if (room != "Assembly") {
-        var tbody = $("div.events ul");
-        tbody.html("");
-        window.alert(room);
-      }
+      //if (hasToken) {
+      var tbody = document.querySelectorAll("li.events-group").forEach(node => node.remove());
+      /*let container = document.querySelector("div.events ul");
+      let day_template = document.querySelector("#day_template");
+      let event_template = document.querySelector("#event_template");*/
+
+      //}
+
     }
 
     function addDays(date, days) {
@@ -510,7 +528,7 @@
   <!-- Navbar Elements -->
   <div class="icon-bar">
     <img src="recources/Icon.png" height="40px" style="position: relative; float: left; left: 5px; top: -1px;" onclick="getTokenID()">
-    <a href="Bookings.html" style="position: relative; left: 10px;">
+    <a href="Bookings.html">
       <img src="recources/booking.png" height="40px;">
       <text style="position: relative; top: -6px;">BOOKINGS</text>
     </a>
@@ -570,9 +588,15 @@
     </form>
   </div>
 
+  <style>
+    h1 {
+      color: black;
+    }
+  </style>
+
   <script>
     // Get the modal
-    let room = "Assembly";
+
     document.getElementById("myText").innerHTML = room;
     document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
 
@@ -595,13 +619,19 @@
 
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
-    <h1 style="position: absolute; left: 660px; top: 13px;">
+    <h1 style="position: absolute; left: 400px; top: 13px;">
       <img id="RoomLogo" src="recources/" height="40px;" style="position: relative; top: -13px;">
       <span id="myText" style="position: relative; top: -27px; left: 10px"></span>
     </h1>
     <div class="cd-schedule loading">
       <div class="timeline">
         <ul>
+          <li>
+            <span>07:00</span>
+          </li>
+          <li>
+            <span>07:30</span>
+          </li>
           <li>
             <span>08:00</span>
           </li>
@@ -701,7 +731,10 @@
         </header>
 
         <div class="body">
-          <div class="event-info"></div>
+          <div class="event-info" id="event_data">
+            <h1></h1>
+            <h1></h1>
+          </div>
           <div class="body-bg"></div>
         </div>
 
