@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
 
@@ -44,239 +42,240 @@
   }
 </style>
 
-<style>
-  /* Dropdown button for picking rooms */
+<head>
+  <style>
+    /* Dropdown button for picking rooms */
 
-  .dropbtn {
-    background-color: #6e6e6e;
-    color: white;
-    /* padding: 16px; */
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    height: 55px;
-    position: relative;
-    top: -15px;
-  }
-
-  .dropbtn:hover,
-  .dropbtn:focus {
-    background-color: rgb(200, 0, 0);
-  }
-
-  .dropdown {
-    position: absolute;
-    display: block;
-    top: 0;
-    right: 0;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: relative;
-    top: -18px;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    position: relative;
-    z-index: 5;
-  }
-
-  .dropdown a:hover {
-    background-color: #ddd;
-  }
-
-  .show {
-    display: block;
-  }
-
-  /* Dropdown button ends */
-
-  /* Navbar */
-
-  .icon-bar {
-    width: 100%;
-    background-color: #6e6e6e;
-    height: 40px;
-    overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .icon-bar a {
-    float: left;
-    width: 20%;
-    text-align: center;
-    padding: 12px 0;
-    transition: all 0.3s ease;
-    color: white;
-    font-size: 36px;
-    position: relative;
-    top: -12px;
-  }
-
-  .icon-bar a:hover {
-    background-color: rgb(200, 0, 0);
-  }
-
-  /* Navbar ends */
-</style>
-
-<!-- Login -->
-<style>
-  input[type=text],
-  input[type=password] {
-    width: 100%;
-    padding: 12px 2px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-
-  /* Set a style for all buttons */
-
-  button {
-    background-color: rgb(200, 0, 0);
-    color: white;
-    padding: 14px 20px;
-    border: none;
-    cursor: pointer;
-  }
-
-  button:hover {
-    opacity: 0.8;
-  }
-
-  /* Extra styles for the cancel button */
-
-  .cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-  }
-
-  /* Center the image and position the close button */
-
-  .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-  }
-
-  img.avatar {
-    width: 40%;
-    border-radius: 40%;
-  }
-
-  .container {
-    padding: 16px;
-    text-align: center;
-  }
-
-  span.psw {
-    float: right;
-    padding-top: 16px;
-  }
-
-  /* The Modal (background) */
-
-  .modal {
-    display: none;
-    /* Hidden by default */
-    position: relative;
-    /* Stay in place */
-    z-index: 10;
-    /* Sit on top */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-    padding-top: 60px;
-  }
-
-  /* Modal Content/Box */
-
-  .modal-content {
-    background-color: #050505;
-    margin: 5% auto 15% auto;
-    /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 20%;
-    /* Could be more or less, depending on screen size */
-  }
-
-  /* The Close Button (x) */
-
-  .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: rgb(200, 0, 0);
-    font-size: 35px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-  }
-
-  /* Add Zoom Animation */
-
-  .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-  }
-
-  @-webkit-keyframes animatezoom {
-    from {
-      -webkit-transform: scale(0)
+    .dropbtn {
+      background-color: #6e6e6e;
+      color: white;
+      /* padding: 16px; */
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      height: 55px;
+      position: relative;
+      top: -15px;
     }
-    to {
-      -webkit-transform: scale(1)
-    }
-  }
 
-  @keyframes animatezoom {
-    from {
-      transform: scale(0)
+    .dropbtn:hover,
+    .dropbtn:focus {
+      background-color: rgb(200, 0, 0);
     }
-    to {
-      transform: scale(1)
-    }
-  }
 
-  /* Change styles for span and cancel button on extra small screens */
-
-  @media screen and (max-width: 300px) {
-    span.psw {
+    .dropdown {
+      position: absolute;
       display: block;
-      float: none;
+      top: 0;
+      right: 0;
     }
-    .cancelbtn {
+
+    .dropdown-content {
+      display: none;
+      position: relative;
+      top: -18px;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      overflow: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      z-index: 5;
+    }
+
+    .dropdown a:hover {
+      background-color: #ddd;
+    }
+
+    .show {
+      display: block;
+    }
+
+    /* Dropdown button ends */
+
+    /* Navbar */
+
+    .icon-bar {
       width: 100%;
+      background-color: #6e6e6e;
+      height: 40px;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
     }
-  }
-</style>
-<!-- Login popup ends -->
+
+    .icon-bar a {
+      float: left;
+      width: 20%;
+      text-align: center;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      color: white;
+      font-size: 36px;
+      position: relative;
+      top: -12px;
+    }
+
+    .icon-bar a:hover {
+      background-color: rgb(200, 0, 0);
+    }
+
+    /* Navbar ends */
+  </style>
+
+  <!-- Login -->
+  <style>
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 12px 2px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+
+    button {
+      background-color: rgb(200, 0, 0);
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    /* Center the image and position the close button */
+
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      position: relative;
+    }
+
+    img.avatar {
+      width: 40%;
+      border-radius: 40%;
+    }
+
+    .container {
+      padding: 16px;
+      text-align: center;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: relative;
+      /* Stay in place */
+      z-index: 10;
+      /* Sit on top */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+      padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+
+    .modal-content {
+      background-color: #050505;
+      margin: 5% auto 15% auto;
+      /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 20%;
+      /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      color: rgb(200, 0, 0);
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: rgb(255, 255, 255);
+      cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+
+    .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes animatezoom {
+      from {
+        transform: scale(0)
+      }
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+  </style>
+  <!-- Login popup ends -->
 
 </head>
 
-<body class="w3-black" onload="parseToken()">
+<body class="w3-black" onload="parseToken(room)">
   <script>
     let token;
 
@@ -296,7 +295,7 @@
         "&nonce=678910", "_self");
     }
 
-    function parseToken() {
+    function parseToken(r) {
       if (window.location.href.includes("token")) {
         var token_url = window.location.href;
         token_url = token_url.split("#")[1].split("&");
@@ -313,8 +312,16 @@
       let xmlHttp = new XMLHttpRequest();
       //cccbf502-6b91-40d6-be02-5ffa0eb711d6 the other one
       //af4bf8cf-c789-4e0d-8d22-c0028c419bf1 our original
+      if (!room) {
+        room = "Assembly";
+      } else {
+        room = r;
+      }
+      document.getElementById("myText").innerHTML = room;
+      document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
       xmlHttp.open("GET",
-        "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/Assembly@bbd.co.za/calendar/events",
+        "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/" + room +
+        "@bbd.co.za/calendar/events",
         false);
 
       xmlHttp.setRequestHeader("Authorization", "Bearer " + token);
@@ -353,7 +360,7 @@
       for (let days_count = 0; days_count < days.length; days_count++) {
         daysIterator = refference_day.addDays(days_count);
         /*if (!days[days_count])
-            days[days_count] = [];*/
+        days[days_count] = [];*/
         for (I = 0; I < obj.value.length; I++) {
           var bookingSubject = obj.value[I].subject;
           var bookee = obj.value[0].organizer.emailAddress.name;
@@ -473,12 +480,23 @@
           li.setAttribute("data-start", eventToDisplay.Start_time);
           li.setAttribute("data-end", eventToDisplay.End_time);
           li.setAttribute("data-content", "event-abs-circuit");
-          li.setAttribute("data-event", eventToDisplay.Subject)
+          var num = Math.round(Math.random() * (4 - 1) + 1);
+          li.setAttribute("data-event", "event-" + num.toString());
+          let em = li.querySelector("em");
+          em.textContent = "Meeting";
 
           ul.appendChild(cloneEvent);
         }
         daysarray_counter++;
         container.appendChild(cloneDay);
+      }
+    }
+
+    function clearTable() {
+      if (room != "Assembly") {
+        var tbody = $("div.events ul");
+        tbody.html("");
+        window.alert(room);
       }
     }
 
@@ -491,7 +509,8 @@
 
   <!-- Navbar Elements -->
   <div class="icon-bar">
-    <a href="Home.html" onclick="getTokenID()">
+    <img src="recources/Icon.png" height="40px" style="position: relative; float: left; left: 5px; top: -1px;" onclick="getTokenID()">
+    <a href="Home.html" style="position: relative; left: 10px;">
       <img src="recources/cal.png" height="40px;">
       <text style="position: relative; top: -6px;">SCHEDULE</text>
     </a>
@@ -509,20 +528,20 @@
       <text style="position: relative; top: -8px;">ROOM</text>
     </button>
     <div id="myDropdown" class="dropdown-content">
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Assembly.png" height="30px">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Assembly.png" height="30px" onclick="clearTable(); parseToken('Assembly')">
         <text style="position: relative; top: -8px; left: 2px">Assembly</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Flex.png" height="30px">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Flex.png" height="30px" onclick="clearTable(); getRoom('Flex'); parseToken('Flex')">
         <text style="position: relative; top: -8px; left: 2px">Flex</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/iOS.png" height="30px">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/iOS.png" height="30px" onclick="clearTable(); getRoom('iOS'); parseToken('iOS')">
         <text style="position: relative; top: -8px; left: 2px">iOS</text>
       </a>
-      <a href="#" onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Windows.png" height="30px">
+      <a onclick="document.getElementById('id01').style.display='block'">
+        <img src="recources/Windows.png" height="30px" onclick="clearTable(); getRoom('Windows'); parseToken('Windows')">
         <text style="position: relative; top: -8px; left: 2px">Windows</text>
       </a>
     </div>
@@ -557,6 +576,16 @@
 
   <script>
     // Get the modal
+    let room = "Assembly";
+    document.getElementById("myText").innerHTML = room;
+    document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
+
+    function getRoom(r) {
+      room = r;
+      document.getElementById("myText").innerHTML = room;
+      document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
+    }
+
     var modal = document.getElementById('id01');
 
     // When the user clicks anywhere outside of the modal, close it
@@ -570,6 +599,10 @@
 
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
+    <h1 style="position: absolute; left: 660px; top: 13px;">
+      <img id="RoomLogo" src="recources/" height="40px;" style="position: relative; top: -13px;">
+      <span id="myText" style="position: relative; top: -27px; left: 10px"></span>
+    </h1>
     <div class="cd-schedule loading">
       <div class="timeline">
         <ul>
