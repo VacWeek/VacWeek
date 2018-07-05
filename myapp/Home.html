@@ -320,6 +320,7 @@
         room = r;
       }
       document.getElementById("myText").innerHTML = room;
+      document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
       xmlHttp.open("GET",
         "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/" + room +
         "@bbd.co.za/calendar/events",
@@ -530,7 +531,7 @@
     </button>
     <div id="myDropdown" class="dropdown-content">
       <a onclick="document.getElementById('id01').style.display='block'">
-        <img src="recources/Assembly.png" height="30px" onclick="clearTable(); getRoom('Assembly'); parseToken('Assembly')">
+        <img src="recources/Assembly.png" height="30px" onclick="clearTable(); parseToken('Assembly')">
         <text style="position: relative; top: -8px; left: 2px">Assembly</text>
       </a>
       <a onclick="document.getElementById('id01').style.display='block'">
@@ -579,10 +580,12 @@
     // Get the modal
     let room = "Assembly";
     document.getElementById("myText").innerHTML = room;
+    document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
 
     function getRoom(r) {
       room = r;
       document.getElementById("myText").innerHTML = room;
+      document.getElementById("RoomLogo").setAttribute("src", "recources/" + room + ".png");
     }
 
     var modal = document.getElementById('id01');
@@ -599,7 +602,8 @@
   <!-- Page Content -->
   <div class="w3-padding-large" id="main">
     <h1 style="position: absolute; left: 660px; top: 13px;">
-      <span id="myText"></span>
+      <img id="RoomLogo" src="recources/" height="40px;" style="position: relative; top: -13px;">
+      <span id="myText" style="position: relative; top: -27px; left: 10px"></span>
     </h1>
     <div class="cd-schedule loading">
       <div class="timeline">
